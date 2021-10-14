@@ -17,5 +17,5 @@ develop some way to solve that problem.
 - As a user,  I want to be able to add a food item to the list of food items in the fridge. 
 - As a user, I want to be able to view all the food items in the fridge.
 - As a user, I want to be able to check whether a certain food item is in the list of food items in the fridge. 
-- As a user, I want to be able to check how long a certain food item has been in the fridge for. 
+- As a user, I want to be able to check when a certain food item was put in the fridge. 
 - As a user, I want to be able to remove a food item from the list of food items. 
