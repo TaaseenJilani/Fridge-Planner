@@ -24,8 +24,7 @@ public class ListOfFoodItem {
     // MODIFIES: this
     // EFFECTS: Removes the name of FoodItem from the list of FoodItem names
     public void removeFoodItem(FoodItem foodItem) {
-        listOfFoodItem.remove(foodItem));
-
+        listOfFoodItem.remove(foodItem);
     }
 
     // EFFECTS: returns the size of the list of FoodItems
