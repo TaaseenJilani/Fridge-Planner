@@ -23,6 +23,8 @@ public class ListOfFoodItemTest {
 
     @Test
     void testAddFoodItem() {
+        assertEquals(0, testListOfFoodItem.size());
+        assertFalse(testListOfFoodItem.contains(testFoodItem1));
         testListOfFoodItem.addFoodItem(testFoodItem1);
         assertEquals(1, testListOfFoodItem.size());
         assertTrue(testListOfFoodItem.contains(testFoodItem1));
