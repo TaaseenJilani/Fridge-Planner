@@ -18,7 +18,6 @@ public class ListOfFoodItem {
     //          Adds the name of FoodItem to an empty list
     public void addFoodItem(FoodItem foodItem) {
         listOfFoodItem.add(foodItem);
-//        listOfFoodItemNames.add(foodItem.getName());
     }
 
     // MODIFIES: this

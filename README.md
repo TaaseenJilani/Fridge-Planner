@@ -19,3 +19,5 @@ develop some way to solve that problem.
 - As a user, I want to be able to check whether a certain food item is in the list of food items in the fridge. 
 - As a user, I want to be able to check when a certain food item was put in the fridge. 
 - As a user, I want to be able to remove a food item from the list of food items. 
+- As a user, I want to be able to save my current fridge to file.
+- As a user, I want to be able to reload my current fridge from file. 
