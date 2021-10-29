@@ -24,13 +24,14 @@ public class ListOfFoodItem implements Writable {
     public String getName() {
         return name;
     }
+
     // MODIFIES: this
     // EFFECTS: Adds FoodItem to an empty list
     //          Adds the name of FoodItem to an empty list
     public void addFoodItem(FoodItem foodItem) {
-
         listOfFoodItem.add(foodItem);
     }
+
 
     // MODIFIES: this
     // EFFECTS: Removes the name of FoodItem from the list of FoodItem names
@@ -45,7 +46,12 @@ public class ListOfFoodItem implements Writable {
 
     // EFFECTS: returns whether the list of food items contain a certain FoodItem or not
     public boolean contains(FoodItem foodItem) {
-        return listOfFoodItem.contains(foodItem);
+        if (listOfFoodItem.contains(foodItem)) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
 

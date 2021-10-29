@@ -163,9 +163,9 @@ public class FridgePlannerApp extends ListOfFoodItem {
     //          displays the list of items in the fridge to the user
     public void commandIsV() {
         List<FoodItem> listOfFoodItems = loi.getListOfFoodItem();
-            for (FoodItem item: listOfFoodItems) {
-                System.out.println(item.getName());
-            }
+        for (FoodItem item: listOfFoodItems) {
+            System.out.println(item.getName());
+        }
 
     }
 
