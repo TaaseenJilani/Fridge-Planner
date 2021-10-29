@@ -1,10 +1,13 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.time.LocalDate;
 
 // Represents a food item having a name, a description of container,
 // and time (in days) for how long it has been in the fridge.
-public class FoodItem {
+public class FoodItem implements Writable {
     private String name;                  // name of the food item
     private String container;             // Description of the container it was put in the fridge
     private LocalDate date;               // what date the item is put in the fridge
@@ -37,5 +40,15 @@ public class FoodItem {
     }
 
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("container", container);
+        return json;
+    }
 }
+
+
+
 

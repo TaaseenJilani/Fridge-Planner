@@ -2,7 +2,11 @@ package ui;
 
 import model.FoodItem;
 import model.ListOfFoodItem;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -10,13 +14,19 @@ import java.util.Scanner;
 
 // Fridge Planner application
 public class FridgePlannerApp extends ListOfFoodItem {
-    String name;
-    String description;
+    private static final String JSON_STORE = "./data/ListOfFoodItem.json";
     private Scanner input;
-    Scanner in = new Scanner(System.in);
+    ListOfFoodItem loi;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the FridgePlanner application
-    public FridgePlannerApp() {
+    public FridgePlannerApp() throws FileNotFoundException {
+        super("My Fridge");
+        input = new Scanner(System.in);
+        loi = new ListOfFoodItem("My Fridge");
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runFridgePlanner();
     }
 
@@ -25,6 +35,7 @@ public class FridgePlannerApp extends ListOfFoodItem {
     public void runFridgePlanner() {
         boolean running = true;
         String command = null;
+        input = new Scanner(System.in);
 
         init();
 
@@ -46,6 +57,7 @@ public class FridgePlannerApp extends ListOfFoodItem {
 
     // MODIFIES: this
     // EFFECTS: processes the commands of the user
+
     private void processCommand(String command) {
         if (command.equals("a")) {
             commandIsA();
@@ -57,6 +69,10 @@ public class FridgePlannerApp extends ListOfFoodItem {
             commandIsC();
         } else if (command.equals("d")) {
             commandIsD();
+        } else if (command.equals("s")) {
+            saveFridge();
+        } else if (command.equals("l")) {
+            loadFridge();
         } else {
             System.out.println("Invalid input!");
         }
@@ -67,31 +83,32 @@ public class FridgePlannerApp extends ListOfFoodItem {
     //          lets the user add a FoodItem to the list of food items
     public void commandIsA() {
         System.out.println("Please add the name of the food item that you wish to add to the fridge:");
-        name = in.nextLine();
+        String name = input.next();
         System.out.println("Please add a description of the container you are putting your food item in:");
-        description = in.nextLine();
+        String description = input.next();
         FoodItem newFoodItem = new FoodItem(name, description);
-        addFoodItem(newFoodItem);
+        loi.addFoodItem(newFoodItem);
         System.out.println("Item added to your fridge!");
     }
 
     // MODIFIES: this
     // EFFECTS: determines how the application will behave if the user's input is "r"
     public void commandIsR() {
-        if (listOfFoodItem.size() == 0) {
+        if (loi.size() == 0) {
             System.out.println("You cannot remove anything because your fridge is already empty!");
         } else {
-            List<FoodItem> toRemove = new ArrayList<FoodItem>();
+            List<FoodItem> toRemove = new ArrayList<>();
             System.out.println("Please enter the name of the food item you want to remove:");
-            name = in.nextLine();
+            String name = input.next();
             System.out.println("Please enter the description of the food item that you want to remove:");
-            description = in.nextLine();
-            for (FoodItem item : listOfFoodItem) {
+            String description = input.next();
+            List<FoodItem> listOfFoodItems = loi.getListOfFoodItem();
+            for (FoodItem item : listOfFoodItems) {
                 if (name.equals(item.getName()) && description.equals(item.getDescription())) {
                     toRemove.add(item);
                 }
             }
-            listOfFoodItem.removeAll(toRemove);
+            loi.removeAll(toRemove);
             if (toRemove.size() == 0) {
                 System.out.println("Unable to remove because this item is not in your fridge.");
             }
@@ -104,10 +121,11 @@ public class FridgePlannerApp extends ListOfFoodItem {
     public void commandIsC() {
         List<Boolean> inFridge = new ArrayList<Boolean>();
         System.out.println("Please enter the name of the food item you want to check:");
-        name = in.nextLine();
+        String name = input.next();
         System.out.println("Please enter the description of the box of that item:");
-        description = in.nextLine();
-        for (FoodItem item : listOfFoodItem) {
+        String description = input.next();
+        List<FoodItem> listOfFoodItems = loi.getListOfFoodItem();
+        for (FoodItem item : listOfFoodItems) {
             if (name.equals(item.getName()) && description.equals(item.getDescription())) {
                 System.out.println("Yes, " + name + " is in your fridge!");
                 inFridge.add(true);
@@ -125,10 +143,11 @@ public class FridgePlannerApp extends ListOfFoodItem {
     public void commandIsD() {
         List<Boolean> inFridgeForDate = new ArrayList<Boolean>();
         System.out.println("Please enter the name of the food item you want to check the date of:");
-        name = in.nextLine();
+        String name = input.next();
         System.out.println("Please enter the description of the box which that food item is in:");
-        description = in.nextLine();
-        for (FoodItem item: listOfFoodItem) {
+        String description = input.next();
+        List<FoodItem> listOfFoodItems = loi.getListOfFoodItem();
+        for (FoodItem item: listOfFoodItems) {
             if (name.equals(item.getName()) && description.equals(item.getDescription())) {
                 System.out.println(name + " was inserted in the fridge on " + item.getDate());
                 inFridgeForDate.add(true);
@@ -143,15 +162,16 @@ public class FridgePlannerApp extends ListOfFoodItem {
     // EFFECTS: determines how the application will behave if the user's input is "v"
     //          displays the list of items in the fridge to the user
     public void commandIsV() {
-        if (listOfFoodItem.size() == 0) {
-            System.out.println("Your fridge is empty!");
-        } else {
-            for (FoodItem item: listOfFoodItem) {
+        List<FoodItem> listOfFoodItems = loi.getListOfFoodItem();
+            for (FoodItem item: listOfFoodItems) {
                 System.out.println(item.getName());
             }
-        }
 
     }
+
+
+
+
 
 
     // MODIFIES: this
@@ -169,7 +189,33 @@ public class FridgePlannerApp extends ListOfFoodItem {
         System.out.println("\t v -> View all the items in your fridge");
         System.out.println("\t c -> Check whether a food item is in the fridge");
         System.out.println("\t d -> Check the date a food item was put into the fridge");
+        System.out.println("\t s -> Save your Fridge");
+        System.out.println("\t l -> Load your Fridge");
         System.out.println("\t q -> quit this fridge and start a new one");
+    }
+
+    // EFFECTS: saves the workroom to file
+    private void saveFridge() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(loi);
+            jsonWriter.close();
+            System.out.println("Saved " + loi.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadFridge() {
+        List<FoodItem> listOfFoodItems = loi.getListOfFoodItem();
+        try {
+            this.loi = this.jsonReader.read();
+            System.out.println("Loaded " + loi.getName() +  " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 
 }

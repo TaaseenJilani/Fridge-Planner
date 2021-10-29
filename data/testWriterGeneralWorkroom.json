@@ -1,0 +1,13 @@
+{
+    "ListOfFoodItem": [
+        {
+            "container": "black box",
+            "name": "Chicken curry"
+        },
+        {
+            "container": "red box",
+            "name": "ribs"
+        }
+    ],
+    "name": "My Fridge"
+}

@@ -1,0 +1,13 @@
+{
+    "ListOfFoodItem": [
+        {
+            "container": "asdfasdf",
+            "name": "asdf"
+        },
+        {
+            "container": "asdfasdf",
+            "name": "asdfasdf"
+        }
+    ],
+    "name": "My Fridge"
+}

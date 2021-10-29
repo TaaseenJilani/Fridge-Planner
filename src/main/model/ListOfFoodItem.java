@@ -1,22 +1,34 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
 // represents the list of food items in the fridge.
-public class ListOfFoodItem {
-    protected List<FoodItem> listOfFoodItem;
+public class ListOfFoodItem implements Writable {
+    private String name;
+    private List<FoodItem> listOfFoodItem;
 
     // EFFECTS: Creates an empty list of FoodItems
-    public ListOfFoodItem() {
-        listOfFoodItem = new ArrayList<FoodItem>();
+    public ListOfFoodItem(String name) {
+        this.name = name;
+        listOfFoodItem = new ArrayList<>();
     }
 
+
+    public String getName() {
+        return name;
+    }
     // MODIFIES: this
     // EFFECTS: Adds FoodItem to an empty list
     //          Adds the name of FoodItem to an empty list
     public void addFoodItem(FoodItem foodItem) {
+
         listOfFoodItem.add(foodItem);
     }
 
@@ -34,6 +46,33 @@ public class ListOfFoodItem {
     // EFFECTS: returns whether the list of food items contain a certain FoodItem or not
     public boolean contains(FoodItem foodItem) {
         return listOfFoodItem.contains(foodItem);
+    }
+
+
+    public List<FoodItem> getListOfFoodItem() {
+        return Collections.unmodifiableList(listOfFoodItem);
+    }
+
+    public void removeAll(List toRemove) {
+        listOfFoodItem.removeAll(toRemove);
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("ListOfFoodItem", listOfFoodItemToJson());
+        return json;
+    }
+
+    // EFFECTS: returns food items in the fridge as a JSON array
+    private JSONArray listOfFoodItemToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (FoodItem f : listOfFoodItem) {
+            jsonArray.put(f.toJson());
+        }
+
+        return jsonArray;
     }
 }
 

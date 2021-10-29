@@ -18,7 +18,7 @@ public class ListOfFoodItemTest {
     void runBefore() {
         testFoodItem1 = new FoodItem("Smoked Salmon", "Yellow rectangular box");
         testFoodItem2 = new FoodItem("Ribs", "Black plastic container");
-        testListOfFoodItem = new ListOfFoodItem();
+        testListOfFoodItem = new ListOfFoodItem("testListOfFoodItem");
     }
 
     @Test
