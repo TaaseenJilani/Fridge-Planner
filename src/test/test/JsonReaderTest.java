@@ -1,8 +1,10 @@
-package persistence;
+package test;
 
 import model.FoodItem;
 import model.ListOfFoodItem;
 import org.junit.jupiter.api.Test;
+import persistence.JsonReader;
+import persistence.JsonTest;
 
 import java.io.IOException;
 import java.util.List;
