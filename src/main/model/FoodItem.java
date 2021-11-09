@@ -45,6 +45,7 @@ public class FoodItem implements Writable {
         JSONObject json = new JSONObject();
         json.put("name", name);
         json.put("container", container);
+        json.put("date", date);
         return json;
     }
 }

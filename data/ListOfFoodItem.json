@@ -1,12 +1,12 @@
 {
     "ListOfFoodItem": [
         {
-            "container": "asdfasdf",
-            "name": "asdf"
+            "container": "black box",
+            "name": "chicken curry"
         },
         {
-            "container": "asdfasdf",
-            "name": "asdfasdf"
+            "container": "blue box",
+            "name": "salmon"
         }
     ],
     "name": "My Fridge"
