@@ -60,15 +60,15 @@ public class FridgePlannerApp extends ListOfFoodItem {
 
     private void processCommand(String command) {
         if (command.equals("a")) {
-            commandIsA();
+            addItem();
         } else if (command.equals("r")) {
-            commandIsR();
+            removeItem();
         } else if (command.equals("v")) {
-            commandIsV();
+            viewItems();
         } else if (command.equals("c")) {
-            commandIsC();
+            checkItem();
         } else if (command.equals("d")) {
-            commandIsD();
+            checkDateOfItem();
         } else if (command.equals("s")) {
             saveFridge();
         } else if (command.equals("l")) {
@@ -81,7 +81,7 @@ public class FridgePlannerApp extends ListOfFoodItem {
     // MODIFIES: this
     // EFFECTS: determines how the application will behave if the user's input is "a"
     //          lets the user add a FoodItem to the list of food items
-    public void commandIsA() {
+    public void addItem() {
         System.out.println("Please add the name of the food item that you wish to add to the fridge:");
         String name = input.next();
         System.out.println("Please add a description of the container you are putting your food item in:");
@@ -93,7 +93,7 @@ public class FridgePlannerApp extends ListOfFoodItem {
 
     // MODIFIES: this
     // EFFECTS: determines how the application will behave if the user's input is "r"
-    public void commandIsR() {
+    public void removeItem() {
         if (loi.size() == 0) {
             System.out.println("You cannot remove anything because your fridge is already empty!");
         } else {
@@ -118,7 +118,7 @@ public class FridgePlannerApp extends ListOfFoodItem {
     // MODIFIES: this
     // EFFECTS: determines how the application will behave if the user's input is "c"
     //          checks to see if a certain food item is in the food item list
-    public void commandIsC() {
+    public void checkItem() {
         List<Boolean> inFridge = new ArrayList<Boolean>();
         System.out.println("Please enter the name of the food item you want to check:");
         String name = input.next();
@@ -140,7 +140,7 @@ public class FridgePlannerApp extends ListOfFoodItem {
     // MODIFIES: this
     // EFFECTS: determines how the application will behave if the user's input is "d"
     //          lets the user check the date at which a certain food item was inserted
-    public void commandIsD() {
+    public void checkDateOfItem() {
         List<Boolean> inFridgeForDate = new ArrayList<Boolean>();
         System.out.println("Please enter the name of the food item you want to check the date of:");
         String name = input.next();
@@ -161,7 +161,7 @@ public class FridgePlannerApp extends ListOfFoodItem {
     // MODIFIES: this
     // EFFECTS: determines how the application will behave if the user's input is "v"
     //          displays the list of items in the fridge to the user
-    public void commandIsV() {
+    public void viewItems() {
         List<FoodItem> listOfFoodItems = loi.getListOfFoodItem();
         for (FoodItem item: listOfFoodItems) {
             System.out.println(item.getName());
