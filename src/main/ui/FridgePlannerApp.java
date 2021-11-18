@@ -209,7 +209,6 @@ public class FridgePlannerApp extends ListOfFoodItem {
     // MODIFIES: this
     // EFFECTS: loads workroom from file
     private void loadFridge() {
-        List<FoodItem> listOfFoodItems = loi.getListOfFoodItem();
         try {
             this.loi = this.jsonReader.read();
             System.out.println("Loaded " + loi.getName() +  " from " + JSON_STORE);
