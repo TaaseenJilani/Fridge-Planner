@@ -108,7 +108,7 @@ public class FridgePlannerApp extends ListOfFoodItem {
                     toRemove.add(item);
                 }
             }
-            loi.removeAll(toRemove);
+            loi.removeAllElements(toRemove);
             if (toRemove.size() == 0) {
                 System.out.println("Unable to remove because this item is not in your fridge.");
             }

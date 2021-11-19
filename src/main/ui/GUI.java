@@ -169,7 +169,7 @@ public class GUI implements ActionListener {
             if (toRemove.size() == 0) {
                 JOptionPane.showMessageDialog(frame, "Cannot remove item because item not in fridge");
             } else {
-                listOfFI.removeAll(toRemove);
+                listOfFI.removeAllElements(toRemove);
             }
         }
     }
@@ -238,7 +238,7 @@ public class GUI implements ActionListener {
         }
     }
 
-    // Determines what happens when the load button is pressed
+
     public void loadButtonPressed() {
         try {
             this.listOfFI = this.jsonReader.read();

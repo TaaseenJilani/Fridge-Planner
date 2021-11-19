@@ -59,7 +59,7 @@ public class ListOfFoodItem implements Writable {
         return Collections.unmodifiableList(listOfFoodItem);
     }
 
-    public void removeAll(List toRemove) {
+    public void removeAllElements(List toRemove) {
         listOfFoodItem.removeAll(toRemove);
     }
 
