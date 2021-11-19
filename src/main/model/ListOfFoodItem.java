@@ -59,8 +59,8 @@ public class ListOfFoodItem implements Writable {
         return Collections.unmodifiableList(listOfFoodItem);
     }
 
-    public void removeAllElements(List toRemove) {
-        listOfFoodItem.removeAll(toRemove);
+    public void removeAllElements(List toDelete) {
+        listOfFoodItem.removeAll(toDelete);
     }
 
     @Override

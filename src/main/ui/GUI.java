@@ -136,7 +136,7 @@ public class GUI implements ActionListener {
     public void addButtonPressed() {
         FoodItem newFoodItem = new FoodItem(name, description);
         listOfFI.addFoodItem(newFoodItem);
-        JOptionPane.showMessageDialog(frame, "Item Successfully added!");
+        JOptionPane.showMessageDialog(frame, "Item Successfully added to fridge!");
     }
 
     // EFFECTS: Determines what happens when the check button is pressed
@@ -145,19 +145,19 @@ public class GUI implements ActionListener {
         List<FoodItem> listOfFoodItems = listOfFI.getListOfFoodItem();
         for (FoodItem item : listOfFoodItems) {
             if (name.equals(item.getName()) && description.equals(item.getDescription())) {
-                JOptionPane.showMessageDialog(frame, "Item in list!");
+                JOptionPane.showMessageDialog(frame, "This item IS in your fridge!!");
                 inFridge.add(true);
             }
         }
         if (inFridge.size() == 0) {
-            JOptionPane.showMessageDialog(frame, "Item NOT in list!");
+            JOptionPane.showMessageDialog(frame, "This item is NOT in your fridge!");
         }
     }
 
     // EFFECTS: Determines what happens when the remove button is pressed
     public void removeButtonPressed() {
         if (listOfFI.size() == 0) {
-            JOptionPane.showMessageDialog(frame, "Cannot remove item because fridge empty!");
+            JOptionPane.showMessageDialog(frame, "Cannot remove item because your fridge is empty!");
         } else {
             List<FoodItem> toRemove = new ArrayList<>();
             List<FoodItem> listOfFoodItems = listOfFI.getListOfFoodItem();
@@ -167,9 +167,10 @@ public class GUI implements ActionListener {
                 }
             }
             if (toRemove.size() == 0) {
-                JOptionPane.showMessageDialog(frame, "Cannot remove item because item not in fridge");
+                JOptionPane.showMessageDialog(frame, "Cannot remove item because the item is not in fridge!");
             } else {
                 listOfFI.removeAllElements(toRemove);
+                JOptionPane.showMessageDialog(frame, "Item removed successfully!");
             }
         }
     }
@@ -210,20 +211,17 @@ public class GUI implements ActionListener {
         frame2.setResizable(false);
     }
 
-
     // EFFECTS: Determines what happens when the checkDate button is pressed
     public void checkDateButtonPressed() {
-        Boolean found = false;
         for (FoodItem fooditem: listOfFI.getListOfFoodItem()) {
-            if (found == false) {
-                if (name.equals(fooditem.getName()) && description.equals(fooditem.getDescription())) {
-                    found = true;
-                    JOptionPane.showMessageDialog(frame, "This item was inserted to the fridge on "
-                            + fooditem.getDate());
-                }
+            if (name.equals(fooditem.getName()) && description.equals(fooditem.getDescription())) {
+                JOptionPane.showMessageDialog(frame, "This item was inserted to the fridge on "
+                        + fooditem.getDate());
+                return;
             }
-
         }
+        JOptionPane.showMessageDialog(frame, "Cannot check the item because this item is not in your fridge!");
+
     }
 
     // EFFECTS: Determines what happens when the save button is pressed
