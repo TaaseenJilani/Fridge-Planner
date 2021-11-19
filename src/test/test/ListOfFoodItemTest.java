@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,12 +14,14 @@ public class ListOfFoodItemTest {
     private ListOfFoodItem testListOfFoodItem;
     private FoodItem testFoodItem1;
     private FoodItem testFoodItem2;
+    private ArrayList<FoodItem> testArray;
 
     @BeforeEach
     void runBefore() {
         testFoodItem1 = new FoodItem("Smoked Salmon", "Yellow rectangular box");
         testFoodItem2 = new FoodItem("Ribs", "Black plastic container");
         testListOfFoodItem = new ListOfFoodItem("testListOfFoodItem");
+        testArray = new ArrayList<FoodItem>();
     }
 
     @Test
@@ -41,5 +44,16 @@ public class ListOfFoodItemTest {
         assertFalse(testListOfFoodItem.contains(testFoodItem1));
         assertTrue(testListOfFoodItem.contains(testFoodItem2));
         assertEquals(1, testListOfFoodItem.size());
+    }
+
+    @Test
+    void testRemoveAllElements() {
+        testListOfFoodItem.addFoodItem(testFoodItem1);
+        testListOfFoodItem.addFoodItem(testFoodItem2);
+        assertEquals(2, testListOfFoodItem.size());
+        testArray.add(testFoodItem1);
+        testArray.add(testFoodItem2);
+        testListOfFoodItem.removeAllElements(testArray);
+        assertEquals(0, testListOfFoodItem.size());
     }
 }
