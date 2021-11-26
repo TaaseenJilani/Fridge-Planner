@@ -36,3 +36,9 @@ Fri Nov 26 10:19:15 PST 2021
 Added salmon to fridge!   
 Fri Nov 26 10:19:27 PST 2021   
 Removed ribs from fridge!   
+
+## ***Phase 4 Task 3***
+
+If I had more time to work on the project, I would've refactored my code to make better use of
+all the functions that I created in the model class. I do not use all of these classes in my ui in the
+most efficient way. Using them could make my code much shorter and more convenient. 
