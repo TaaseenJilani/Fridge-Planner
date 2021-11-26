@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.FoodItem;
 import model.ListOfFoodItem;
 import persistence.JsonReader;
@@ -28,6 +30,7 @@ public class GUI implements ActionListener {
     JButton displayButton;
     JButton saveButton;
     JButton loadButton;
+    JButton quitButton;
     JTextField nameOfFoodItem;
     JTextField descriptionOfContainer;
     JPanel panel;
@@ -69,6 +72,7 @@ public class GUI implements ActionListener {
         panel.add(displayButton);
         panel.add(saveButton);
         panel.add(loadButton);
+        panel.add(quitButton);
 
     }
 
@@ -82,6 +86,7 @@ public class GUI implements ActionListener {
         displayButton = new JButton("Display all of the food items in your fridge");
         saveButton = new JButton("Save your fridge");
         loadButton = new JButton("Load your previous fridge");
+        quitButton = new JButton("Quit");
         itemNameLabel = new JLabel("Enter the name of the Food Item:");
         descriptionLabel = new JLabel("Enter the description of the container your food item is in:");
         nameOfFoodItem = new JTextField();
@@ -108,6 +113,7 @@ public class GUI implements ActionListener {
         checkDateButton.addActionListener(this);
         saveButton.addActionListener(this);
         loadButton.addActionListener(this);
+        quitButton.addActionListener(this);
     }
 
     @Override
@@ -129,6 +135,8 @@ public class GUI implements ActionListener {
             saveButtonPressed();
         } else if (e.getSource() == loadButton) {
             loadButtonPressed();
+        } else if (e.getSource() == quitButton) {
+            quitButtonPressed();
         }
     }
 
@@ -169,7 +177,9 @@ public class GUI implements ActionListener {
             if (toRemove.size() == 0) {
                 JOptionPane.showMessageDialog(frame, "Cannot remove item because the item is not in fridge!");
             } else {
-                listOfFI.removeAllElements(toRemove);
+                for (FoodItem fooditem : toRemove) {
+                    listOfFI.removeFoodItem(fooditem);
+                }
                 JOptionPane.showMessageDialog(frame, "Item removed successfully!");
             }
         }
@@ -236,7 +246,7 @@ public class GUI implements ActionListener {
         }
     }
 
-
+    // EFFECTS: Determines what happens when the load button is pressed
     public void loadButtonPressed() {
         try {
             this.listOfFI = this.jsonReader.read();
@@ -244,6 +254,16 @@ public class GUI implements ActionListener {
         } catch (IOException exception) {
             JOptionPane.showMessageDialog(frame, "Unable to read from file: " + JSON_STORE);
         }
+    }
+
+    // Determines what happens when the quit button is pressed, and prints the log.
+    public void quitButtonPressed() {
+        frame.dispose();
+
+        for (Event event: EventLog.getInstance()) {
+            System.out.println(event);
+        }
+        System.exit(0);
     }
 
 }

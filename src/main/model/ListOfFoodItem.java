@@ -30,6 +30,7 @@ public class ListOfFoodItem implements Writable {
     //          Adds the name of FoodItem to an empty list
     public void addFoodItem(FoodItem foodItem) {
         listOfFoodItem.add(foodItem);
+        EventLog.getInstance().logEvent(new Event("Added " + foodItem.getName() + " to fridge!"));
     }
 
 
@@ -37,6 +38,7 @@ public class ListOfFoodItem implements Writable {
     // EFFECTS: Removes the name of FoodItem from the list of FoodItem names
     public void removeFoodItem(FoodItem foodItem) {
         listOfFoodItem.remove(foodItem);
+        EventLog.getInstance().logEvent(new Event("Removed " + foodItem.getName() + " from fridge!"));
     }
 
     // EFFECTS: returns the size of the list of FoodItems

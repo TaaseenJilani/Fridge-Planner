@@ -21,3 +21,18 @@ develop some way to solve that problem.
 - As a user, I want to be able to remove a food item from the list of food items. 
 - As a user, I want to be able to save my current fridge to file.
 - As a user, I want to be able to reload my current fridge from file. 
+
+## ***Credit***
+The save and load features of this project is based on the code that was provided as an example.
+
+## ***Phase 4: Task 2***
+Sample:
+
+Fri Nov 26 10:18:58 PST 2021       
+Added chicken curry to fridge!    
+Fri Nov 26 10:19:06 PST 2021   
+Added ribs to fridge!   
+Fri Nov 26 10:19:15 PST 2021   
+Added salmon to fridge!   
+Fri Nov 26 10:19:27 PST 2021   
+Removed ribs from fridge!   

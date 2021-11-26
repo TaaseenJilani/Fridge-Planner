@@ -20,6 +20,8 @@ public class FridgePlannerApp extends ListOfFoodItem {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
+
+
     // EFFECTS: runs the FridgePlanner application
     public FridgePlannerApp() throws FileNotFoundException {
         super("My Fridge");
@@ -108,11 +110,15 @@ public class FridgePlannerApp extends ListOfFoodItem {
                     toRemove.add(item);
                 }
             }
-            loi.removeAllElements(toRemove);
             if (toRemove.size() == 0) {
                 System.out.println("Unable to remove because this item is not in your fridge.");
+            } else {
+                for (FoodItem fooditem : toRemove) {
+                    loi.removeFoodItem(fooditem);
+                }
             }
         }
+
     }
 
     // MODIFIES: this
@@ -216,5 +222,4 @@ public class FridgePlannerApp extends ListOfFoodItem {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
-
 }
